@@ -1,0 +1,6 @@
+[submodule "mmdetection3d"]
+	path = mmdetection3d
+	url = git@github.com:CaptainTrojan/mmdetection3d.git
+[submodule "kitti_object_vis"]
+	path = kitti_object_vis
+	url = git@github.com:kuixu/kitti_object_vis.git
