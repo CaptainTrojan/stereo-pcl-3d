@@ -1,0 +1,9 @@
+
+[local_docker]
+image_repo = us-central1-docker.pkg.dev/easyml-394818/torchx/kitti-stereo-pcl
+
+[kubernetes]
+queue = default
+image_repo = us-central1-docker.pkg.dev/easyml-394818/torchx/kitti-stereo-pcl
+namespace = torchx
+image_secret = gar-secret

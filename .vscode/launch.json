@@ -1,0 +1,146 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Generate KITTI stereo PCL (full, train)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "mmdetection3d/tools/kitti_stereo_pcl_gen.py",
+            "console": "integratedTerminal",
+            "args":[
+                "KITTI/training"
+            ]
+        },
+        {
+            "name": "Generate KITTI stereo PCL (full, test)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "mmdetection3d/tools/kitti_stereo_pcl_gen.py",
+            "console": "integratedTerminal",
+            "args":[
+                "KITTI/testing"
+            ]
+        },
+        {
+            "name": "Generate KITTI stereo PCL (smaller, train)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "mmdetection3d/tools/kitti_stereo_pcl_gen.py",
+            "console": "integratedTerminal",
+            "args":[
+                "KITTI_smaller/training"
+            ]
+        },
+        {
+            "name": "Generate KITTI stereo PCL (smaller, test)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "mmdetection3d/tools/kitti_stereo_pcl_gen.py",
+            "console": "integratedTerminal",
+            "args":[
+                "KITTI_smaller/testing"
+            ]
+        },
+        {
+            "name": "Generate KITTI stereo PCL (train, max 5)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "mmdetection3d/tools/kitti_stereo_pcl_gen.py",
+            "console": "integratedTerminal",
+            "args":[
+                "KITTI_smaller/training",
+                "--max_samples", "5"
+            ]
+        },
+        {
+            "name": "Visualize (train, idx 0)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-l", "stereo_pcl",
+                "-i", "0"
+            ]
+        },
+        {
+            "name": "Visualize (train, idx 1)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-l", "stereo_pcl",
+                "-i", "1"
+            ]
+        },
+        {
+            "name": "Visualize (train, idx 2)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-l", "stereo_pcl",
+                "-i", "2"
+            ]
+        },
+        {
+            "name": "Visualize (train, normal idx 0)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-i", "0"
+            ]
+        },
+        {
+            "name": "Visualize (train, normal idx 1)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-i", "1"
+            ]
+        },
+        {
+            "name": "Visualize (train, normal idx 2)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "kitti_object_vis/kitti_object.py",
+            "console": "integratedTerminal",
+            "args":[
+                "--show_lidar_with_depth",
+                "--const_box",
+                "--vis",
+                "-d", "KITTI_smaller",
+                "-i", "2"
+            ]
+        }
+    ]
+}

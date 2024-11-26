@@ -1,0 +1,6 @@
+KITTI
+KITTI_smaller
+__pycache__/
+*.tar.gz
+.venv
+google-creds.json

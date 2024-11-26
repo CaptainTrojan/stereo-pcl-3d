@@ -1,0 +1,6 @@
+.venv
+KITTI
+KITTI_smaller
+*.tar.gz
+*.onnx
+kitti_object_vis
