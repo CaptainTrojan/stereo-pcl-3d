@@ -28,6 +28,7 @@ RUN git clone -b main https://github.com/open-mmlab/mmdeploy.git
 RUN cd mmdeploy && pip install -v -e .
 
 # Add our edited mmdetection3d repo in
+RUN echo "Cloning mmdetection3d"
 RUN git clone -b main https://github.com/CaptainTrojan/mmdetection3d.git /workspace/mmdetection3d
 RUN cd /workspace/mmdetection3d && pip install -v -e .
 # Install some required packages
