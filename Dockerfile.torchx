@@ -30,7 +30,7 @@ RUN cd mmdeploy && pip install -v -e .
 # Add our edited mmdetection3d repo in
 RUN git clone -b main https://github.com/CaptainTrojan/mmdetection3d.git /workspace/mmdetection3d \
     && cd /workspace/mmdetection3d \
-    && git checkout 72a050d8b8992ccb58f863c3cd3f23f544b53985
+    && git checkout 578ae9db21df30b2fd8ff982b0ed79367757c78a
 RUN cd /workspace/mmdetection3d && pip install -v -e .
 # Install some required packages
 RUN pip install openxlab onnxruntime==1.15.0 mlflow google-cloud-storage gcsfs==2023.1.0 openvino-dev[onnx]==2022.3.0
