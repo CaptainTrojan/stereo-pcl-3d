@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  namespace: torchx  # Specify the namespace
+spec:
+  activeDeadlineSeconds: 300  # Terminates after 5 minutes (300 seconds)
+  nodeSelector:
+    cloud.google.com/gke-nodepool: np-experimental-training-16-t4    # nodepool name here
+  tolerations:
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Equal
+    value: present
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Exists
+  containers:
+  - name: simple-container
+    image: nginx
+    resources:                # To check if nodepool can handle some combination of resources / limits
+      limits:
+        cpu: "15"
+        memory: 55G
+        nvidia.com/gpu: "1"
+      requests:
+        cpu: 14900m
+        memory: 52976M
+        nvidia.com/gpu: "1"
+    ports:
+    - containerPort: 80

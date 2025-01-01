@@ -19,4 +19,4 @@ torchx run -s kubernetes dist.ddp \
         -j 1x1 \
         --env TRAIN_TARGET=$TRAIN_TARGET \
         -h gpu_l4 \
-        --script entrypoint.py
+        --script entrypoint.py 

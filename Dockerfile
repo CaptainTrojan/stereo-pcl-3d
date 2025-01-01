@@ -77,4 +77,4 @@ COPY entrypoint.py /workspace/mmdetection3d/entrypoint.py
 COPY download_from_gcs.py /workspace/mmdetection3d/download_from_gcs.py
 
 # Run training, export, and logging
-CMD ["bash", "entrypoint.sh"]
+# CMD ["bash", "entrypoint.sh"]

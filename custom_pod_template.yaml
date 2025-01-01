@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  namespace: torchx
+spec:
+  activeDeadlineSeconds: 300
+  nodeSelector:
+    cloud.google.com/gke-nodepool: np-experimental-training-16-t4
+  tolerations:
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Equal
+    value: present
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Exists
+  containers:
+  - name: entrypoint-0
+    image: us-central1-docker.pkg.dev/easyml-394818/torchx/kitti-stereo-pcl:bcfc798a9063c84f82c7e779edee401611ae397f70a2a347d4b85bb19692ed2d
+    command:
+      - bash
+      - -c
+      - torchrun --rdzv_backend c10d --rdzv_endpoint localhost:0 --rdzv_id 'kitti-stereo-pcl-kh6r2562wgn5rc' --nnodes 1 --nproc_per_node 1 --tee 3 --role '' entrypoint.py
+    resources:
+      limits:
+        cpu: "3"
+        memory: 12G
+        nvidia.com/gpu: "1"
+        ephemeral-storage: 60Gi
+      requests:
+        cpu: 2900m
+        memory: 10976M
+        ephemeral-storage: 60Gi
+    env:
+    - name: TRAIN_TARGET
+      value: stereo
+    - name: TORCHX_TRACKING_EXPERIMENT_NAME
+      value: default-experiment
+    - name: LOGLEVEL
+      value: WARNING
+    - name: TORCHX_JOB_ID
+      value: kubernetes://torchx/kitti-stereo-pcl-kh6r2562wgn5rc
+    - name: TORCHX_RANK0_HOST
+      value: localhost
+    - name: VK_TASK_INDEX
+      value: "0"
+    - name: VC_TASK_INDEX
+      value: "0"
+    - name: VC_ENTRYPOINT_0_HOSTS
+      valueFrom:
+        configMapKeyRef:
+          name: kitti-stereo-pcl-kh6r2562wgn5rc-svc
+          key: VC_ENTRYPOINT_0_HOSTS
+    - name: VC_ENTRYPOINT_0_NUM
+      valueFrom:
+        configMapKeyRef:
+          name: kitti-stereo-pcl-kh6r2562wgn5rc-svc
+          key: VC_ENTRYPOINT_0_NUM
+    ports:
+    - containerPort: 29500
+      protocol: TCP
+    volumeMounts:
+    - name: dshm
+      mountPath: /dev/shm
+    - name: kitti-stereo-pcl-kh6r2562wgn5rc-svc
+      mountPath: /etc/volcano
+    - name: kube-api-access-9zsrj
+      mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      readOnly: true
+  volumes:
+  - name: dshm
+    emptyDir:
+      medium: Memory
+  - name: kitti-stereo-pcl-kh6r2562wgn5rc-svc
+    configMap:
+      name: kitti-stereo-pcl-kh6r2562wgn5rc-svc
+  - name: kube-api-access-9zsrj
+    projected:
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+      - configMap:
+          name: kube-root-ca.crt
+      - downwardAPI: {}
