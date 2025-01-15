@@ -1,6 +1,11 @@
 [submodule "mmdetection3d"]
 	path = mmdetection3d
 	url = git@github.com:CaptainTrojan/mmdetection3d.git
+	branch = main
+	commit = 578ae9db21df30b2fd8ff982b0ed79367757c78a
+
 [submodule "kitti_object_vis"]
 	path = kitti_object_vis
 	url = git@github.com:kuixu/kitti_object_vis.git
+	branch = master
+	commit = 12ce0a2348f6e1405c502bf32e51d76d3a970396
